@@ -2,8 +2,10 @@ import React from "react";
 import { Button, Grid, Container, Typography } from "@mui/material";
 import axios from "axios";
 
+const host_domain = "http://127.0.0.1:5001";
+
 const buttons = [
-  { label: "Turn On Light", endpoint: "/api/light/on" },
+  { label: "Television On", endpoint: "/tv/on" },
   { label: "Turn Off Light", endpoint: "/api/light/off" },
   { label: "Lock Door", endpoint: "/api/door/lock" },
   { label: "Unlock Door", endpoint: "/api/door/unlock" },
@@ -11,7 +13,7 @@ const buttons = [
 
 const handleButtonClick = (endpoint) => {
   axios
-    .post(endpoint)
+    .get(host_domain + endpoint)
     .then((response) => {
       console.log("Success:", response.data);
     })
