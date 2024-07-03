@@ -2,8 +2,7 @@ import React from "react";
 import { Button, Grid, Container, Typography } from "@mui/material";
 import axios from "axios";
 
-const host_domain =
-  "https://asia-northeast1-doctor-ilcsi.cloudfunctions.net/python-backend-function";
+const host_domain = process.env.HOST_DOMAIN;
 
 const buttons = [
   { label: "/tv/on", endpoint: "/tv/on" },

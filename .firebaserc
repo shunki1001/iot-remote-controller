@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "nihonshu-f58f5"
+  },
+  "targets": {
+    "nihonshu-f58f5": {
+      "hosting": {
+        "remote-home": [
+          "remote-home"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
