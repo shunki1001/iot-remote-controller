@@ -52,3 +52,97 @@ def request_switchbot(endpoint: str, method: str, data: dict):
         return " succeed"
     else:
         return "failed"
+
+
+# %%
+test = {
+    "statusCode": 100,
+    "body": {
+        "deviceList": [
+            {
+                "deviceId": "6055F9412FEE",
+                "deviceName": "プラグミニ",
+                "deviceType": "Plug Mini (US)",
+                "enableCloudService": True,
+                "hubDeviceId": "",
+            },
+            {
+                "deviceId": "CE5847B6B192",
+                "deviceName": "カーテン 92",
+                "deviceType": "Curtain3",
+                "enableCloudService": True,
+                "hubDeviceId": "FE67FD64F492",
+                "calibrate": True,
+                "master": True,
+                "openDirection": "left",
+            },
+            {
+                "deviceId": "DC0200CBED5E",
+                "deviceName": "ボット 5E",
+                "deviceType": "Bot",
+                "enableCloudService": True,
+                "hubDeviceId": "FE67FD64F492",
+            },
+            {
+                "deviceId": "F25F643BA816",
+                "deviceName": "ハブミニ 16",
+                "deviceType": "Hub Mini",
+                "enableCloudService": True,
+                "hubDeviceId": "000000000000",
+            },
+            {
+                "deviceId": "F79A30E4B409",
+                "deviceName": "温湿度計",
+                "deviceType": "Meter",
+                "enableCloudService": True,
+                "hubDeviceId": "FE67FD64F492",
+            },
+            {
+                "deviceId": "FE67FD64F492",
+                "deviceName": "Hub Mini 92",
+                "deviceType": "Hub Mini",
+                "enableCloudService": False,
+                "hubDeviceId": "000000000000",
+            },
+        ],
+        "infraredRemoteList": [
+            {
+                "deviceId": "01-202104122317-60784120",
+                "deviceName": "テレビ",
+                "remoteType": "DIY TV",
+                "hubDeviceId": "FE67FD64F492",
+            },
+            {
+                "deviceId": "01-202209251043-23752078",
+                "deviceName": "太陽",
+                "remoteType": "Light",
+                "hubDeviceId": "FE67FD64F492",
+            },
+            {
+                "deviceId": "02-202403312053-55169345",
+                "deviceName": "ライト",
+                "remoteType": "DIY Light",
+                "hubDeviceId": "F25F643BA816",
+            },
+            {
+                "deviceId": "02-202406211242-11769332",
+                "deviceName": "扇風機",
+                "remoteType": "DIY Fan",
+                "hubDeviceId": "FE67FD64F492",
+            },
+            {
+                "deviceId": "02-202407022156-75534835",
+                "deviceName": "エアコン",
+                "remoteType": "Air Conditioner",
+                "hubDeviceId": "FE67FD64F492",
+            },
+            {
+                "deviceId": "02-202407031551-15155646",
+                "deviceName": "エアコンです",
+                "remoteType": "DIY Air Conditioner",
+                "hubDeviceId": "F25F643BA816",
+            },
+        ],
+    },
+    "message": "success",
+}
