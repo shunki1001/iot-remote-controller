@@ -1,10 +1,14 @@
 import time
 
 from flask import Flask, jsonify
+from flask_cors import CORS
+from functions_wrapper import entrypoint
 
 from functions import request_switchbot
 
 app = Flask(__name__)
+# CORSの追加
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 @app.route("/tv/on", methods=["GET"])
@@ -260,7 +264,7 @@ def desk_light_darken():
     )
 
 
-# 他のエンドポイントも同様に定義
+app_wrap = lambda request: entrypoint(app, request)
 
 if __name__ == "__main__":
     app.run(debug=True)
