@@ -212,24 +212,17 @@ def desk_light_off():
 def desk_light_brighten():
     for _ in range(10):
         request_switchbot(
-            "devices/02-202403312053-55169345/commands",
+            "scenes/2f14dd6b-609d-4ec6-bbc0-333400ffff9c/execute",
             "POST",
-            {
-                "parameter": "default",
-                "command": "brightnessUp",
-                "commandType": "command",
-            },
+            {},
         )
+        time.sleep(5)
     return jsonify(
         {
             "status": request_switchbot(
-                "devices/02-202403312053-55169345/commands",
+                "scenes/2f14dd6b-609d-4ec6-bbc0-333400ffff9c/execute",
                 "POST",
-                {
-                    "parameter": "default",
-                    "command": "brightnessUp",
-                    "commandType": "command",
-                },
+                {},
             ),
             "action": "desk-light/brighten",
         }
@@ -240,26 +233,19 @@ def desk_light_brighten():
 def desk_light_darken():
     for _ in range(10):
         request_switchbot(
-            "devices/02-202403312053-55169345/commands",
+            "scenes/fb9559df-98c8-4d2d-82cb-9b008ccaf346/execute",
             "POST",
-            {
-                "parameter": "default",
-                "command": "brightnessDown",
-                "commandType": "command",
-            },
+            {},
         )
+        time.sleep(5)
     return jsonify(
         {
             "status": request_switchbot(
-                "devices/02-202403312053-55169345/commands",
+                "scenes/fb9559df-98c8-4d2d-82cb-9b008ccaf346/execute",
                 "POST",
-                {
-                    "parameter": "default",
-                    "command": "brightnessDown",
-                    "commandType": "command",
-                },
+                {},
             ),
-            "action": "desk-light/darken",
+            "action": "desk-light/brighten",
         }
     )
 
