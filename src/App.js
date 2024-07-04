@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Grid, Container, Typography } from "@mui/material";
 import axios from "axios";
 
-const host_domain = process.env.HOST_DOMAIN;
+const host_domain = process.env.REACT_APP_HOST_DOMAIN;
 
 const buttons = [
   { label: "/tv/on", endpoint: "/tv/on" },
