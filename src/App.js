@@ -1,5 +1,13 @@
-import React from "react";
-import { Button, Grid, Container, Typography } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Button,
+  Grid,
+  Container,
+  Typography,
+  Backdrop,
+  CircularProgress,
+  Snackbar,
+} from "@mui/material";
 import axios from "axios";
 
 const host_domain = process.env.REACT_APP_HOST_DOMAIN;
@@ -20,18 +28,38 @@ const buttons = [
   { label: "/desk-light/darken", endpoint: "/desk-light/darken" },
 ];
 
-const handleButtonClick = (endpoint) => {
-  axios
-    .get(host_domain + endpoint)
-    .then((response) => {
-      console.log("Success:", response.data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-};
-
 const App = () => {
+  const [open, setOpen] = useState(false);
+  const [bdOpen, setBdOpen] = useState(false);
+  const [response, setResponse] = useState("");
+
+  const handleClickOpen = async (endpoint) => {
+    setBdOpen(true);
+    axios
+      .get(host_domain + endpoint)
+      .then((response) => {
+        console.log(response);
+        const data = response.data;
+        console.log(data);
+        // レスポンスを設定
+        setResponse(JSON.stringify(data, null, 2));
+
+        // ダイアログを開く
+        setBdOpen(false);
+        setOpen(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        setResponse("error");
+        setBdOpen(false);
+        setOpen(true);
+      });
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setBdOpen(false);
+  };
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -39,18 +67,33 @@ const App = () => {
       </Typography>
       <Grid container spacing={2}>
         {buttons.map((button, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
+          <Grid item xs={12} sm={6} md={6} key={index}>
             <Button
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => handleButtonClick(button.endpoint)}
+              onClick={() => handleClickOpen(button.endpoint)}
+              sx={{ height: "100px", fontSize: "2em" }}
             >
               {button.label}
             </Button>
           </Grid>
         ))}
       </Grid>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={bdOpen}
+        onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={response}
+        severity="success"
+      />
     </Container>
   );
 };
