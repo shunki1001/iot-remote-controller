@@ -286,7 +286,7 @@ def desk_light_brighten():
 def desk_light_darken():
     for _ in range(10):
         request_switchbot(
-            "scenes/fb9559df-98c8-4d2d-82cb-9b008ccaf346/execute",
+            "scenes/1ef191ed-2772-4072-a2c7-9fd7826682c4/execute",
             "POST",
             {},
         )
@@ -295,11 +295,11 @@ def desk_light_darken():
         jsonify(
             {
                 "status": request_switchbot(
-                    "scenes/fb9559df-98c8-4d2d-82cb-9b008ccaf346/execute",
+                    "scenes/1ef191ed-2772-4072-a2c7-9fd7826682c4/execute",
                     "POST",
                     {},
                 ),
-                "action": "desk-light/brighten",
+                "action": "desk-light/darken",
             }
         ),
         200,
