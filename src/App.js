@@ -13,19 +13,51 @@ import axios from "axios";
 const host_domain = process.env.REACT_APP_HOST_DOMAIN;
 
 const buttons = [
-  { label: "/tv/on", endpoint: "/tv/on" },
-  { label: "/living-ac/on", endpoint: "/living-ac/on" },
-  { label: "/living-ac/off", endpoint: "/living-ac/off" },
-  { label: "/desk-ac/on", endpoint: "/desk-ac/on" },
-  { label: "/desk-ac/off", endpoint: "/desk-ac/off" },
-  { label: "/living-light/on", endpoint: "/living-light/on" },
-  { label: "/living-light/off", endpoint: "/living-light/off" },
-  { label: "/living-light/dinner", endpoint: "/living-light/dinner" },
-  { label: "/living-light/lunch", endpoint: "/living-light/lunch" },
-  { label: "/desk-light/on", endpoint: "/desk-light/on" },
-  { label: "/desk-light/off", endpoint: "/desk-light/off" },
-  { label: "/desk-light/brighten", endpoint: "/desk-light/brighten" },
-  { label: "/desk-light/darken", endpoint: "/desk-light/darken" },
+  {
+    label: "リビングエアコンON",
+    endpoint: "/living-ac/on",
+    category: "error",
+  },
+  {
+    label: "リビングエアコンOFF",
+    endpoint: "/living-ac/off",
+    category: "error",
+  },
+  { label: "書斎エアコンON", endpoint: "/desk-ac/on", category: "primary" },
+  { label: "書斎エアコンOFF", endpoint: "/desk-ac/off", category: "primary" },
+  {
+    label: "リビング電気ON",
+    endpoint: "/living-light/on",
+    category: "error",
+  },
+  {
+    label: "リビング電気OFF",
+    endpoint: "/living-light/off",
+    category: "error",
+  },
+  {
+    label: "リビング電気明るく",
+    endpoint: "/living-light/dinner",
+    category: "error",
+  },
+  {
+    label: "リビング電気暗く",
+    endpoint: "/living-light/lunch",
+    category: "error",
+  },
+  { label: "書斎電気ON", endpoint: "/desk-light/on", category: "primary" },
+  { label: "書斎電気OFF", endpoint: "/desk-light/off", category: "primary" },
+  {
+    label: "書斎電気明るく",
+    endpoint: "/desk-light/brighten",
+    category: "primary",
+  },
+  {
+    label: "書斎電気暗く",
+    endpoint: "/desk-light/darken",
+    category: "primary",
+  },
+  { label: "TVの電源", endpoint: "/tv/on", category: "primary" },
 ];
 
 const App = () => {
@@ -70,7 +102,7 @@ const App = () => {
           <Grid item xs={12} sm={6} md={6} key={index}>
             <Button
               variant="contained"
-              color="primary"
+              color={button.category}
               fullWidth
               onClick={() => handleClickOpen(button.endpoint)}
               sx={{ height: "100px", fontSize: "2em" }}
