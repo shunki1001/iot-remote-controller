@@ -26,7 +26,7 @@ def tv_on():
                         "commandType": "command",
                     },
                 ),
-                "action": "light on",
+                "action": "tv on",
             }
         ),
         200,
@@ -84,12 +84,12 @@ def desk_ac_on():
         jsonify(
             {
                 "status": request_switchbot(
-                    "devices/02-202407031551-15155646/commands",
+                    "devices/02-202407291012-25226595/commands",
                     "POST",
                     {
                         "parameter": "default",
-                        "command": "turnOn",
-                        "commandType": "command",
+                        "command": "冷房25℃",
+                        "commandType": "customize",
                     },
                 ),
                 "action": "desc-ac/on",
@@ -106,131 +106,36 @@ def desk_ac_off():
         jsonify(
             {
                 "status": request_switchbot(
-                    "devices/02-202407031551-15155646/commands",
+                    "devices/02-202407291012-25226595/commands",
                     "POST",
                     {
                         "parameter": "default",
-                        "command": "turnOff",
-                        "commandType": "command",
+                        "command": "OFF",
+                        "commandType": "customize",
                     },
                 ),
-                "action": "desc-ac/on",
+                "action": "desc-ac/off",
             }
         ),
         200,
     )
 
 
-@app.route("/living-light/on", methods=["GET"])
-def living_light_on():
+@app.route("/light/on", methods=["GET"])
+def light_on():
     # IoT デバイスを操作するコードをここに記述
-    return (
-        jsonify(
-            {
-                "status": request_switchbot(
-                    "devices/01-202209251043-23752078/commands",
-                    "POST",
-                    {
-                        "parameter": "default",
-                        "command": "turnOn",
-                        "commandType": "command",
-                    },
-                ),
-                "action": "living-light/on",
-            }
-        ),
-        200,
-    )
-
-
-@app.route("/living-light/off", methods=["GET"])
-def living_light_off():
-    return (
-        jsonify(
-            {
-                "status": request_switchbot(
-                    "devices/01-202209251043-23752078/commands",
-                    "POST",
-                    {
-                        "parameter": "default",
-                        "command": "turnOff",
-                        "commandType": "command",
-                    },
-                ),
-                "action": "living-light/off",
-            }
-        ),
-        200,
-    )
-
-
-@app.route("/living-light/dinner", methods=["GET"])
-def living_light_dinner():
-    return (
-        jsonify(
-            {
-                "status": request_switchbot(
-                    "devices/01-202209251043-23752078/commands",
-                    "POST",
-                    {
-                        "parameter": "default",
-                        "command": "dinner",
-                        "commandType": "customize",
-                    },
-                ),
-                "action": "living-light/dinner",
-            }
-        ),
-        200,
-    )
-
-
-@app.route("/living-light/lunch", methods=["GET"])
-def living_light_lunch():
-    return (
-        jsonify(
-            {
-                "status": request_switchbot(
-                    "devices/01-202209251043-23752078/commands",
-                    "POST",
-                    {
-                        "parameter": "default",
-                        "command": "lunch",
-                        "commandType": "customize",
-                    },
-                ),
-                "action": "living-light/lunch",
-            }
-        ),
-        200,
-    )
-
-
-@app.route("/desk-light/on", methods=["GET"])
-def desk_light_on():
-    return (
-        jsonify(
-            {
-                "status": request_switchbot(
-                    "devices/02-202403312053-55169345/commands",
-                    "POST",
-                    {
-                        "parameter": "default",
-                        "command": "turnOn",
-                        "commandType": "command",
-                    },
-                ),
-                "action": "desk-light/on",
-            }
-        ),
-        200,
-    )
-
-
-@app.route("/desk-light/off", methods=["GET"])
-def desk_light_off():
     request_switchbot(
-        "devices/02-202403312053-55169345/commands",
+        "devices/FE8CB7E0D4C6/commands",
+        "POST",
+        {
+            "parameter": "default",
+            "command": "turnOn",
+            "commandType": "command",
+        },
+    )
+    time.sleep(1)
+    request_switchbot(
+        "devices/02-202407310814-88239725/commands",
         "POST",
         {
             "parameter": "default",
@@ -243,7 +148,7 @@ def desk_light_off():
         jsonify(
             {
                 "status": request_switchbot(
-                    "devices/02-202403312053-55169345/commands",
+                    "devices/DDCC4E0C9819/commands",
                     "POST",
                     {
                         "parameter": "default",
@@ -251,55 +156,94 @@ def desk_light_off():
                         "commandType": "command",
                     },
                 ),
-                "action": "desk-light/off",
+                "action": "light/on",
             }
         ),
         200,
     )
 
 
-@app.route("/desk-light/brighten", methods=["GET"])
-def desk_light_brighten():
-    for _ in range(10):
-        request_switchbot(
-            "scenes/2f14dd6b-609d-4ec6-bbc0-333400ffff9c/execute",
-            "POST",
-            {},
-        )
-        time.sleep(5)
+@app.route("/light/off", methods=["GET"])
+def light_off():
+    request_switchbot(
+        "devices/FE8CB7E0D4C6/commands",
+        "POST",
+        {
+            "parameter": "default",
+            "command": "turnOff",
+            "commandType": "command",
+        },
+    )
+    time.sleep(1)
+    request_switchbot(
+        "devices/02-202407310814-88239725/commands",
+        "POST",
+        {
+            "parameter": "default",
+            "command": "turnOff",
+            "commandType": "command",
+        },
+    )
+    time.sleep(1)
     return (
         jsonify(
             {
                 "status": request_switchbot(
-                    "scenes/2f14dd6b-609d-4ec6-bbc0-333400ffff9c/execute",
+                    "devices/DDCC4E0C9819/commands",
                     "POST",
-                    {},
+                    {
+                        "parameter": "default",
+                        "command": "turnOff",
+                        "commandType": "command",
+                    },
                 ),
-                "action": "desk-light/brighten",
+                "action": "light/off",
             }
         ),
         200,
     )
 
 
-@app.route("/desk-light/darken", methods=["GET"])
-def desk_light_darken():
-    for _ in range(10):
-        request_switchbot(
-            "scenes/1ef191ed-2772-4072-a2c7-9fd7826682c4/execute",
-            "POST",
-            {},
-        )
-        time.sleep(5)
+@app.route("/thermo-sensor", methods=["GET"])
+def thermo_sensor():
+    # IoT デバイスを操作するコードをここに記述
+    response_living = request_switchbot(
+        "devices/C3323435656A/status",
+        "GET",
+        {},
+    )
+    response_desk = request_switchbot(
+        "devices/CB3234354979/status",
+        "GET",
+        {},
+    )
+    response_bedroom = request_switchbot(
+        "devices/F79A30E4B409/status",
+        "GET",
+        {},
+    )
+    state_response = [
+        {
+            "place": "living",
+            "temperature": response_living["body"]["temperature"],
+            "humidity": response_living["body"]["humidity"],
+        },
+        {
+            "place": "desk",
+            "temperature": response_desk["body"]["temperature"],
+            "humidity": response_desk["body"]["humidity"],
+        },
+        {
+            "place": "bedroom",
+            "temperature": response_bedroom["body"]["temperature"],
+            "humidity": response_bedroom["body"]["humidity"],
+        },
+    ]
     return (
         jsonify(
             {
-                "status": request_switchbot(
-                    "scenes/1ef191ed-2772-4072-a2c7-9fd7826682c4/execute",
-                    "POST",
-                    {},
-                ),
-                "action": "desk-light/darken",
+                "status": state_response,
+                "action": "thermo-sensor",
             }
         ),
         200,

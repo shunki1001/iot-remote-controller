@@ -43,15 +43,19 @@ def request_switchbot(endpoint: str, method: str, data: dict):
     host_domain = "https://api.switch-bot.com/v1.1/"
     if method == "GET":
         response = requests.get(url=f"{host_domain}{endpoint}", headers=apiHeader)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return "failed"
     elif method == "POST":
         response = requests.post(
             url=f"{host_domain}{endpoint}", json=data, headers=apiHeader
         )
-    if response.status_code == 200:
-        print(response.json())
-        return " succeed"
-    else:
-        return "failed"
+        if response.status_code == 200:
+            print(response.json())
+            return " succeed"
+        else:
+            return "failed"
 
 
 # %%
@@ -65,6 +69,18 @@ test = {
                 "deviceType": "Plug Mini (US)",
                 "enableCloudService": True,
                 "hubDeviceId": "",
+            },
+            {
+                "deviceId": "C3323435656A",
+                "deviceName": "リビング温度計",
+                "deviceType": "Meter",
+                "hubDeviceId": "000000000000",
+            },
+            {
+                "deviceId": "CB3234354979",
+                "deviceName": "温湿度計 79",
+                "deviceType": "Meter",
+                "hubDeviceId": "000000000000",
             },
             {
                 "deviceId": "CE5847B6B192",
@@ -84,6 +100,13 @@ test = {
                 "hubDeviceId": "FE67FD64F492",
             },
             {
+                "deviceId": "DDCC4E0C9819",
+                "deviceName": "窓側",
+                "deviceType": "Ceiling Light",
+                "enableCloudService": True,
+                "hubDeviceId": "000000000000",
+            },
+            {
                 "deviceId": "F25F643BA816",
                 "deviceName": "ハブミニ 16",
                 "deviceType": "Hub Mini",
@@ -98,10 +121,24 @@ test = {
                 "hubDeviceId": "FE67FD64F492",
             },
             {
+                "deviceId": "FA9F0DC40257",
+                "deviceName": "リモートボタン 57",
+                "deviceType": "Remote",
+                "enableCloudService": False,
+                "hubDeviceId": "000000000000",
+            },
+            {
                 "deviceId": "FE67FD64F492",
                 "deviceName": "Hub Mini 92",
                 "deviceType": "Hub Mini",
                 "enableCloudService": False,
+                "hubDeviceId": "000000000000",
+            },
+            {
+                "deviceId": "FE8CB7E0D4C6",
+                "deviceName": "キッチン側",
+                "deviceType": "Ceiling Light",
+                "enableCloudService": True,
                 "hubDeviceId": "000000000000",
             },
         ],
@@ -111,18 +148,6 @@ test = {
                 "deviceName": "テレビ",
                 "remoteType": "DIY TV",
                 "hubDeviceId": "FE67FD64F492",
-            },
-            {
-                "deviceId": "01-202209251043-23752078",
-                "deviceName": "太陽",
-                "remoteType": "Light",
-                "hubDeviceId": "FE67FD64F492",
-            },
-            {
-                "deviceId": "02-202403312053-55169345",
-                "deviceName": "ライト",
-                "remoteType": "DIY Light",
-                "hubDeviceId": "F25F643BA816",
             },
             {
                 "deviceId": "02-202406211242-11769332",
@@ -137,10 +162,22 @@ test = {
                 "hubDeviceId": "FE67FD64F492",
             },
             {
-                "deviceId": "02-202407031551-15155646",
-                "deviceName": "エアコンです",
-                "remoteType": "DIY Air Conditioner",
+                "deviceId": "02-202407290954-67648624",
+                "deviceName": "エアコン寝室",
+                "remoteType": "Others",
                 "hubDeviceId": "F25F643BA816",
+            },
+            {
+                "deviceId": "02-202407291012-25226595",
+                "deviceName": "ハイセンス",
+                "remoteType": "Others",
+                "hubDeviceId": "FE67FD64F492",
+            },
+            {
+                "deviceId": "02-202407310814-88239725",
+                "deviceName": "ライト",
+                "remoteType": "DIY Light",
+                "hubDeviceId": "FE67FD64F492",
             },
         ],
     },
