@@ -25,6 +25,7 @@ const buttons = [
     endpoint: "/living-ac/off",
     category: "error",
   },
+  { label: "TVの電源", endpoint: "/tv/on", category: "primary" },
   { label: "書斎エアコンON", endpoint: "/desk-ac/on", category: "primary" },
   { label: "書斎エアコンOFF", endpoint: "/desk-ac/off", category: "primary" },
   {
@@ -37,7 +38,6 @@ const buttons = [
     endpoint: "/light/off",
     category: "error",
   },
-  { label: "TVの電源", endpoint: "/tv/on", category: "primary" },
 ];
 
 const App = () => {
@@ -140,15 +140,21 @@ const App = () => {
                   </span>
                 </Typography>
                 <Typography
-                  sx={{ fontSize: 32 }}
+                  sx={{ fontSize: 14 }}
                   color="text.secondary"
                   gutterBottom
                 >
-                  不快指数：
-                  {37 -
-                    (37 - item["temperature"]) /
-                      (0.68 - 0.0014 * item["humidity"] + 1 / 1.76) -
-                    0.29 * item["temperature"] * (1 - item["humidity"] / 100)}
+                  ミスナール指数：
+                  <span style={{ fontSize: "32px" }}>
+                    {Math.floor(
+                      37 -
+                        (37 - item["temperature"]) /
+                          (0.68 - 0.0014 * item["humidity"] + 1 / 1.76) -
+                        0.29 *
+                          item["temperature"] *
+                          (1 - item["humidity"] / 100)
+                    )}
+                  </span>
                 </Typography>
                 <Typography
                   sx={{ fontSize: 12, textAlign: "right" }}
@@ -162,7 +168,7 @@ const App = () => {
           </Grid>
         ))}
         {buttons.map((button, index) => (
-          <Grid item xs={12} sm={6} md={6} key={index}>
+          <Grid item xs={12} sm={4} md={4} key={index}>
             <Button
               variant="contained"
               color={button.category}
